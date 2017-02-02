@@ -1,8 +1,11 @@
 {
   "name": "jokes-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A cli to fetch jokes.",
   "main": "index.js",
+  "engines": {
+    "node": ">=6.9.2"
+  },
   "bin": {
     "jokes": "./index.js"
   },
