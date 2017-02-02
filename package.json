@@ -1,0 +1,18 @@
+{
+  "name": "jokes-cli",
+  "version": "1.0.0",
+  "description": "A cli to fetch jokes.",
+  "main": "index.js",
+  "bin": {
+    "jokes": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}
