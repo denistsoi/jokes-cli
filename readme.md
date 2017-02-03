@@ -2,6 +2,9 @@
 
 A cli to fetch jokes. Will implement other sources, but currently fetches from `reddit.com/r/dadjokes`
 
+![DEMO](demo.gif)
+
+
 ### Installation
 
     npm install -g jokes-cli 
