@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const https = require('https');
 const color = require('colors');
+const ora = require('ora');
 
 const source = {
   reddit: {
@@ -18,12 +19,16 @@ function filterUpVotes(j) {
   return j.data.ups >= 10;
 }
 
+const spinner = ora('asking reddit').start();
+
 https.get(source.reddit.url + source.reddit.sub.dad, (response)=>{
   let json = '';
   response.on('data', (chunk)=>{
     json += chunk;
   });
+  
   response.on('end', ()=>{
+    spinner.stop();
     const jokes = JSON.parse(json).data.children
       .filter(filterOutLink)
       .filter(filterUpVotes)

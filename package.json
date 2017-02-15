@@ -1,6 +1,6 @@
 {
   "name": "jokes-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A cli to fetch jokes.",
   "main": "index.js",
   "engines": {
@@ -20,6 +20,7 @@
     "url": "https://github.com/denistsoi/jokes-cli"
   },
   "dependencies": {
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
+    "ora": "^1.1.0"
   }
 }
