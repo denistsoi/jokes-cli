@@ -21,28 +21,52 @@ function filterUpVotes(j) {
 
 const spinner = ora('asking reddit').start();
 
-https.get(source.reddit.url + source.reddit.sub.dad, (response)=>{
-  let json = '';
-  response.on('data', (chunk)=>{
-    json += chunk;
-  });
-  
-  response.on('end', ()=>{
-    spinner.stop();
-    const jokes = JSON.parse(json).data.children
-      .filter(filterOutLink)
-      .filter(filterUpVotes)
-      .map((joke)=>{
-        let { title, selftext } = joke.data;
-        return { title, selftext };
+async function fetch() {
+  return new Promise((resolve, reject) => {
+    let req = https.get(source.reddit.url + source.reddit.sub.dad, (response)=> {
+      let json = '';
+      response.on('data', (chunk)=>{
+        json += chunk;
       });
-    jokes.slice(0,3).map((joke, i)=>{
-      console.log(`Joke ${i+1}:`.underline)
-      console.log(`${joke.title}\n${joke.selftext}\n`);
+
+      response.on('end', ()=> {
+        spinner.stop();
+        try {
+          var body = json;
+        } catch (e) {
+          reject(e);
+        }
+        resolve(body);
+      });
+      
+      response.on('error', (err)=>{
+        console.warn(err);
+      }); 
     });
+
+    req.on('error', (err)=> {
+      reject(err);
+    });
+
+    req.end();
   });
-  
-  response.on('error', (err)=>{
-    console.warn(err);
+}
+
+const outputResponse = function (body) {
+  const jokes = JSON.parse(body).data.children
+    .filter(filterOutLink)
+    .filter(filterUpVotes)
+    .map((joke)=>{
+      let { title, selftext } = joke.data;
+      return { title, selftext };
+    });
+  jokes.slice(0,3).map((joke, i)=>{
+    console.log(`Joke ${i+1}:`.underline)
+    console.log(`${joke.title}\n${joke.selftext}\n`);
   });
-});
+};
+
+fetch()
+  .then((body) => {
+    outputResponse(body)
+  });
