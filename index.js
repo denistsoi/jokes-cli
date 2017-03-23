@@ -30,7 +30,6 @@ async function fetch() {
       });
 
       response.on('end', ()=> {
-        spinner.stop();
         try {
           var body = json;
         } catch (e) {
@@ -40,15 +39,11 @@ async function fetch() {
       });
       
       response.on('error', (err)=>{
+        reject(e);
         console.warn(err);
       }); 
     });
 
-    req.on('error', (err)=> {
-      reject(err);
-    });
-
-    req.end();
   });
 }
 
@@ -68,5 +63,6 @@ const outputResponse = function (body) {
 
 fetch()
   .then((body) => {
+    spinner.stop();
     outputResponse(body)
   });
