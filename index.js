@@ -2,7 +2,7 @@
 const https = require('https');
 const color = require('colors');
 const ora = require('ora');
-
+const say = require('say');
 const source = {
   reddit: {
     url: 'https://www.reddit.com',
