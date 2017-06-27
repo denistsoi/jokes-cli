@@ -1,4 +1,4 @@
-// #!/usr/bin/env node
+#!/usr/bin/env node
 const color = require('colors');
 const ora = require('ora');
 
