@@ -18,7 +18,7 @@ function filterUpVotes(j) {
   return j.data.ups >= 10;
 }
 
-async function fetch() {
+function fetch() {
   return new Promise((resolve, reject) => {
     let req = https.get(source.reddit.url + source.reddit.sub.dad, (response)=> {
       let json = '';
